@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book a Session — Calvin Christian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#080810;--ivory:#f0ede6;--gold:#c9a84c;--gold-glow:rgba(201,168,76,.35);
+  --ash:#8a8a8a;--green:#5cb85c;--red:#e05252;
+  --font-d:'Cormorant Garamond',Georgia,serif;
+  --font-b:'Inter',sans-serif;--font-m:'Space Mono',monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --g-bg:rgba(255,255,255,.07);--g-bg-h:rgba(255,255,255,.13);
+  --g-border:rgba(255,255,255,.18);--g-sel:rgba(201,168,76,.17);
+  --g-sel-b:rgba(201,168,76,.6);--g-sel-glow:rgba(201,168,76,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--ivory);font-family:var(--font-b);font-weight:300;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{border:none;background:none;font:inherit;cursor:pointer;color:inherit}
+input,textarea,select{font:inherit}
+
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);animation:drift 20s ease-in-out infinite}
+.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(20,55,52,.85) 0%,transparent 70%);top:-250px;left:-200px;animation-delay:0s}
+.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.18) 0%,transparent 70%);top:25%;right:-150px;animation-delay:-7s}
+.o3{width:650px;height:650px;background:radial-gradient(circle,rgba(12,30,50,.9) 0%,transparent 70%);bottom:-200px;left:25%;animation-delay:-14s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(25px,-35px) scale(1.04)}66%{transform:translate(-18px,22px) scale(.97)}}
+.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.65;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(8,8,16,.65);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-logo{font-family:var(--font-m);font-size:.95rem;letter-spacing:.25em;color:var(--gold)}
+.nav-back{display:flex;align-items:center;gap:.55rem;font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);transition:color .2s}
+.nav-back:hover{color:var(--ivory)}
+.nav-back svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.8;fill:none}
+
+.page{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:8rem 2rem 5rem}
+
+/* HERO HEADER */
+.hero-header{text-align:center;margin-bottom:3.5rem;animation:fadeUp .8s var(--ease) both}
+.h-eyebrow{display:block;font-family:var(--font-m);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.h-title{font-family:var(--font-d);font-size:clamp(3rem,8vw,6rem);font-weight:300;line-height:.92;color:var(--ivory)}
+.h-title em{font-style:italic;color:var(--gold)}
+.h-sub{margin-top:1.25rem;font-size:.9rem;color:var(--ash);letter-spacing:.04em}
+
+/* SERVICE TABS */
+.service-tabs{display:flex;gap:1rem;justify-content:center;margin-bottom:3.5rem;animation:fadeUp .8s .1s var(--ease) both;flex-wrap:wrap}
+.tab-pill{
+  position:relative;padding:.75rem 2rem;border-radius:100px;
+  font-family:var(--font-m);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(240,237,230,.7);cursor:pointer;overflow:hidden;isolation:isolate;
+  background:var(--g-bg);border:1px solid var(--g-border);
+  backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);
+  box-shadow:0 6px 24px rgba(0,0,0,.45),inset 0 1.5px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.25);
+  transition:transform .28s var(--ease),background .28s,border-color .28s,color .28s,box-shadow .28s;
+}
+.tab-pill::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.22),transparent);border-radius:100px 100px 0 0;pointer-events:none}
+.tab-pill:hover{transform:translateY(-3px);background:var(--g-bg-h);border-color:rgba(255,255,255,.28);color:var(--ivory);box-shadow:0 12px 36px rgba(0,0,0,.55),inset 0 1.5px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.2)}
+.tab-pill.active{background:var(--g-sel);border-color:var(--g-sel-b);color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 28px var(--g-sel-glow),inset 0 1.5px 0 rgba(201,168,76,.3),inset 0 -1px 0 rgba(0,0,0,.2)}
+.tab-pill.active::before{background:linear-gradient(to bottom,rgba(201,168,76,.18),transparent)}
+.tab-icon{font-size:1.1rem;margin-right:.5rem;vertical-align:middle}
+
+/* PANELS */
+.panel{display:none;animation:panelIn .45s var(--ease) both}
+.panel.active{display:block}
+@keyframes panelIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* GLASS CARD */
+.glass-card{
+  position:relative;border-radius:24px;overflow:hidden;
+  background:var(--g-bg);border:1px solid var(--g-border);
+  backdrop-filter:blur(30px) saturate(1.5);-webkit-backdrop-filter:blur(30px) saturate(1.5);
+  box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1.5px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.25);
+  margin-bottom:2rem;
+}
+.glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(to bottom,rgba(255,255,255,.08),rgba(255,255,255,.01));pointer-events:none;border-radius:24px 24px 0 0}
+.glass-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.3),transparent);pointer-events:none}
+.card-inner{position:relative;z-index:1;padding:2.5rem}
+
+.panel-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;gap:1rem;flex-wrap:wrap}
+.panel-title{font-family:var(--font-d);font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:300;line-height:1.05;color:var(--ivory)}
+.panel-title em{font-style:italic;color:var(--gold)}
+.panel-badge{font-family:var(--font-m);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:.35rem .85rem;border-radius:100px;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.07);white-space:nowrap}
+
+.s-label{display:block;font-family:var(--font-m);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ash);margin-bottom:.85rem;margin-top:1.75rem}
+.s-label:first-child{margin-top:0}
+
+/* GLASS CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.5rem}
+.chip{
+  position:relative;padding:.62rem 1.4rem;border-radius:100px;
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,237,230,.72);cursor:pointer;overflow:hidden;isolation:isolate;
+  background:var(--g-bg);border:1px solid var(--g-border);
+  backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+  box-shadow:0 4px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(0,0,0,.18);
+  transition:transform .22s var(--ease),background .22s,border-color .22s,color .22s,box-shadow .22s;
+}
+.chip::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.14),transparent);border-radius:100px 100px 0 0;pointer-events:none}
+.chip:hover{transform:translateY(-2px);background:var(--g-bg-h);border-color:rgba(255,255,255,.28);color:var(--ivory)}
+.chip.sel{background:var(--g-sel);border-color:var(--g-sel-b);color:var(--gold);transform:translateY(-1px);box-shadow:0 6px 20px var(--g-sel-glow),inset 0 1px 0 rgba(201,168,76,.28),inset 0 -1px 0 rgba(0,0,0,.15)}
+
+/* PACKAGE CARDS */
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:.5rem}
+.pkg-card{
+  position:relative;padding:1.5rem 1.35rem;border-radius:28px;cursor:pointer;overflow:hidden;isolation:isolate;text-align:left;
+  background:var(--g-bg);border:1px solid var(--g-border);
+  backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  box-shadow:0 8px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.2);
+  transition:transform .28s var(--ease),background .28s,border-color .28s,box-shadow .28s;
+}
+.pkg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.1),transparent);border-radius:28px 28px 0 0;pointer-events:none}
+.pkg-card:hover{transform:translateY(-4px);background:var(--g-bg-h);border-color:rgba(255,255,255,.26)}
+.pkg-card.sel{background:var(--g-sel);border-color:var(--g-sel-b);transform:translateY(-2px);box-shadow:0 10px 32px var(--g-sel-glow),inset 0 1px 0 rgba(201,168,76,.28)}
+.pkg-name{font-family:var(--font-m);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ivory);margin-bottom:.5rem;position:relative;z-index:1;transition:color .2s}
+.pkg-card.sel .pkg-name{color:var(--gold)}
+.pkg-sub{font-size:.78rem;color:var(--ash);line-height:1.65;position:relative;z-index:1}
+.pkg-price{margin-top:.75rem;font-family:var(--font-d);font-size:1.35rem;font-weight:300;color:var(--gold);position:relative;z-index:1}
+
+/* PRICE BAR */
+.price-bar{
+  display:none;margin:1.5rem 0;padding:1.1rem 1.4rem;border-radius:20px;overflow:hidden;position:relative;
+  background:rgba(201,168,76,.09);border:1px solid rgba(201,168,76,.28);
+  box-shadow:0 4px 20px rgba(201,168,76,.1),inset 0 1px 0 rgba(201,168,76,.2);
+}
+.price-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.5),transparent)}
+.price-bar.show{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.pb-label{font-family:var(--font-m);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,168,76,.75)}
+.pb-price{font-family:var(--font-d);font-size:1.8rem;font-weight:300;color:var(--gold);line-height:1}
+.pb-note{font-size:.78rem;color:var(--ash);margin-top:.2rem}
+
+/* CALENDAR */
+.cal-section{margin:1.5rem 0}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.cal-title{font-family:var(--font-m);font-size:.85rem;letter-spacing:.1em;color:var(--ivory)}
+.cal-nav{
+  display:flex;align-items:center;gap:.5rem;
+  font-family:var(--font-m);font-size:.72rem;letter-spacing:.08em;color:var(--ash);
+}
+.cal-nav button{
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--g-bg);border:1px solid var(--g-border);color:var(--ivory);
+  backdrop-filter:blur(10px);transition:all .2s;
+}
+.cal-nav button:hover{background:var(--g-bg-h);border-color:rgba(255,255,255,.28)}
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:4px;
+}
+.cal-day-name{
+  text-align:center;font-family:var(--font-m);font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ash);
+  padding:.4rem 0;
+}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:100px;font-family:var(--font-m);font-size:.75rem;
+  color:rgba(240,237,230,.65);cursor:pointer;
+  border:1px solid transparent;
+  transition:all .18s var(--ease);position:relative;
+}
+.cal-day:hover:not(.cal-blocked):not(.cal-past):not(.cal-empty){
+  background:var(--g-bg-h);border-color:rgba(255,255,255,.2);color:var(--ivory);
+}
+.cal-day.cal-today{border-color:rgba(201,168,76,.4);color:var(--gold)}
+.cal-day.cal-sel{
+  background:var(--g-sel);border-color:var(--g-sel-b);color:var(--gold);
+  box-shadow:0 4px 16px var(--g-sel-glow);
+}
+.cal-day.cal-blocked{
+  background:rgba(224,82,82,.08);border-color:rgba(224,82,82,.2);
+  color:rgba(224,82,82,.5);cursor:not-allowed;
+  flex-direction:column;gap:1px;
+}
+.cal-full-badge{
+  font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(224,82,82,.6);font-family:var(--font-m);
+  display:block;line-height:1;
+}
+.cal-day.cal-past{color:rgba(240,237,230,.2);cursor:not-allowed}
+.cal-day.cal-empty{cursor:default;pointer-events:none}
+.cal-legend{display:flex;gap:1.25rem;margin-top:.85rem;flex-wrap:wrap}
+.cal-legend-item{display:flex;align-items:center;gap:.45rem;font-size:.7rem;color:var(--ash);font-family:var(--font-m)}
+.cal-legend-dot{width:10px;height:10px;border-radius:50%}
+
+/* DELIVERY CARD */
+.delivery-card{
+  margin:1.25rem 0;padding:1.25rem 1.5rem;border-radius:18px;
+  background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.25);
+  box-shadow:0 4px 20px rgba(201,168,76,.08),inset 0 1px 0 rgba(201,168,76,.15);
+  position:relative;
+}
+.delivery-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.4),transparent)}
+.delivery-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.delivery-label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.7);margin-bottom:.3rem}
+.delivery-date-val{font-family:var(--font-d);font-size:1.6rem;font-weight:300;color:var(--gold);line-height:1}
+.delivery-note{font-size:.75rem;color:var(--ash);margin-top:.3rem}
+
+/* URGENT TOGGLE */
+.urgent-toggle-wrap{flex-shrink:0}
+.urgent-toggle{display:flex;flex-direction:column;gap:.5rem;cursor:pointer;align-items:center}
+.urgent-toggle input{display:none}
+.urgent-track{width:52px;height:28px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);position:relative;transition:background .3s,border-color .3s;display:block}
+.urgent-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--ash);box-shadow:0 2px 6px rgba(0,0,0,.4);transition:transform .3s var(--ease),background .3s}
+.urgent-toggle input:checked~.urgent-track{background:rgba(201,168,76,.25);border-color:rgba(201,168,76,.6)}
+.urgent-toggle input:checked~.urgent-track .urgent-thumb{transform:translateX(24px);background:var(--gold)}
+.urgent-labels{text-align:center}
+.urgent-text{display:block;font-family:var(--font-m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory)}
+.urgent-surcharge{display:block;font-size:.7rem;color:var(--gold);font-family:var(--font-m);margin-top:.2rem}
+
+/* FORM */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row.full{grid-template-columns:1fr}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ash)}
+.field input,.field textarea,.field select{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--ivory);font-size:.9rem;font-weight:300;padding:.82rem 1rem;
+  border-radius:100px;outline:none;resize:vertical;
+  backdrop-filter:blur(10px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 2px 8px rgba(0,0,0,.25);
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.field textarea{border-radius:16px}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(201,168,76,.55);background:rgba(201,168,76,.04);box-shadow:inset 0 1px 0 rgba(201,168,76,.1),0 0 0 3px rgba(201,168,76,.08)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(138,138,138,.6)}
+.field input[type=date]{color-scheme:dark}
+.field select option{background:#1a1a2e}
+
+/* PAYMENT CARDS */
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.pay-card{
+  position:relative;display:flex;align-items:center;gap:1rem;
+  padding:1.3rem 1.25rem;border-radius:28px;cursor:pointer;overflow:hidden;isolation:isolate;
+  background:var(--g-bg);border:1px solid var(--g-border);
+  backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  box-shadow:0 8px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.2);
+  transition:transform .28s var(--ease),background .28s,border-color .28s,box-shadow .28s;
+}
+.pay-card::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.1),transparent);border-radius:28px 28px 0 0;pointer-events:none}
+.pay-card:hover{transform:translateY(-3px);background:var(--g-bg-h);border-color:rgba(255,255,255,.26)}
+.pay-card.sel{background:var(--g-sel);border-color:var(--g-sel-b);transform:translateY(-2px);box-shadow:0 10px 32px var(--g-sel-glow),inset 0 1px 0 rgba(201,168,76,.28)}
+.pay-icon{font-size:1.8rem;flex-shrink:0;position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.pay-info{position:relative;z-index:1}
+.pay-name{display:block;font-family:var(--font-m);font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory);margin-bottom:.25rem;transition:color .2s}
+.pay-card.sel .pay-name{color:var(--gold)}
+.pay-detail{display:block;font-family:var(--font-m);font-size:.68rem;color:var(--ash);line-height:1.6}
+
+/* DIVIDER */
+.divider{height:1px;margin:2rem 0;background:linear-gradient(to right,transparent,rgba(255,255,255,.08),transparent)}
+
+/* SUBMIT */
+.btn-submit{
+  display:inline-flex;align-items:center;gap:.85rem;padding:1rem 2.5rem;border-radius:100px;
+  font-family:var(--font-m);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);background:var(--gold);
+  box-shadow:0 6px 28px rgba(201,168,76,.4);
+  transition:background .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden;
+}
+.btn-submit::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.25),transparent);pointer-events:none}
+.btn-submit:hover:not(:disabled){background:#d4b057;transform:translateY(-2px);box-shadow:0 10px 36px rgba(201,168,76,.5)}
+.btn-submit:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-arrow{font-size:1.1rem;transition:transform .2s;position:relative;z-index:1}
+.btn-submit:hover .btn-arrow{transform:translateX(4px)}
+
+.feedback{margin-top:.85rem;font-size:.83rem;min-height:1.2rem}
+.feedback.err{color:var(--red)}
+.feedback.ok{color:var(--green)}
+
+.content-field{display:none;margin-top:1.25rem}
+.content-field.show{display:block}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:700px){
+  .nav{padding:1rem 1.5rem}.page{padding:6.5rem 1rem 3.5rem}
+  .service-tabs{gap:.6rem}.tab-pill{padding:.65rem 1.25rem;font-size:.68rem}
+  .card-inner{padding:1.5rem 1.25rem}.pkg-grid,.pay-grid,.form-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){.h-title{font-size:2.8rem}.tab-pill .tab-icon{display:none}}
+
+/* ══════════════════════════════════
+   INVOICE OVERLAY
+══════════════════════════════════ */
+.inv-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(8,8,16,.94);backdrop-filter:blur(20px);
+  overflow-y:auto;padding:2rem 1rem;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+.inv-overlay.active{opacity:1;pointer-events:all}
+.inv-wrap{max-width:660px;margin:0 auto;animation:fadeUp .45s var(--ease) both}
+
+.inv-card{
+  position:relative;border-radius:24px;overflow:hidden;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(24px);
+  box-shadow:0 24px 64px rgba(0,0,0,.6),inset 0 1.5px 0 rgba(255,255,255,.18);
+}
+.inv-gold-line{height:3px;background:linear-gradient(to right,transparent,rgba(201,168,76,.85),transparent)}
+.inv-body{padding:2.5rem}
+
+.inv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.inv-brand-name{font-family:var(--font-d);font-size:2.2rem;font-weight:300;color:var(--ivory);line-height:1}
+.inv-brand-name em{font-style:italic;color:var(--gold)}
+.inv-brand-sub{font-size:.75rem;color:var(--ash);margin-top:.35rem;font-family:var(--font-m)}
+.inv-num-label{font-family:var(--font-m);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ash)}
+.inv-num{font-family:var(--font-m);font-size:1.15rem;color:var(--gold);margin-top:.2rem}
+.inv-date-str{font-family:var(--font-m);font-size:.7rem;color:var(--ash);margin-top:.3rem}
+
+.inv-divider{height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.1),transparent);margin:1.5rem 0}
+
+.inv-meta{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.inv-meta-block-label{font-family:var(--font-m);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-bottom:.6rem}
+.inv-meta-val{font-size:.92rem;color:var(--ivory);margin-bottom:.2rem}
+.inv-meta-sub{font-size:.78rem;color:var(--ash);font-family:var(--font-m);margin-top:.15rem}
+
+/* Line items */
+.inv-table{border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:2rem}
+.inv-table-head{display:grid;grid-template-columns:1fr auto;background:rgba(255,255,255,.04)}
+.inv-th{padding:.65rem 1.1rem;font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash)}
+.inv-th:last-child{text-align:right}
+.inv-line{display:grid;grid-template-columns:1fr auto;border-top:1px solid rgba(255,255,255,.05)}
+.inv-line-desc{padding:.85rem 1.1rem;font-size:.87rem;color:rgba(240,237,230,.82)}
+.inv-line-desc small{display:block;font-size:.75rem;color:var(--ash);margin-top:.25rem;font-family:var(--font-m)}
+.inv-line-amt{padding:.85rem 1.1rem;font-family:var(--font-d);font-size:1.05rem;font-weight:300;color:var(--ivory);text-align:right;white-space:nowrap}
+.inv-total-row{display:grid;grid-template-columns:1fr auto;border-top:1px solid rgba(201,168,76,.35);background:rgba(201,168,76,.06)}
+.inv-total-label{padding:1rem 1.1rem;font-family:var(--font-m);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.inv-total-amt{padding:1rem 1.1rem;font-family:var(--font-d);font-size:1.6rem;font-weight:300;color:var(--gold);text-align:right;line-height:1}
+
+/* Deposit notice */
+.inv-deposit{padding:1rem 1.25rem;border-radius:12px;background:rgba(201,168,76,.07);border-left:3px solid var(--gold);margin-bottom:2rem;font-size:.82rem;color:rgba(240,237,230,.75);line-height:1.65}
+
+/* Payment detail box */
+.inv-pay-box{border-radius:14px;padding:1.25rem 1.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+.inv-pay-box-label{font-family:var(--font-m);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-bottom:.85rem}
+.inv-pay-detail{font-size:.87rem;color:rgba(240,237,230,.78);line-height:1.8}
+.inv-pay-detail strong{color:var(--ivory)}
+.inv-pay-detail code{font-family:var(--font-m);background:rgba(255,255,255,.08);padding:.12rem .5rem;border-radius:6px;font-size:.82rem;color:var(--gold)}
+
+/* Notes box */
+.inv-notes-box{border-radius:12px;padding:1rem 1.5rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);margin-bottom:2rem;display:none}
+.inv-notes-box.show{display:block}
+
+/* Invoice actions */
+.inv-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.inv-btn-back{
+  flex:1;min-width:140px;padding:.9rem 1.5rem;border-radius:100px;
+  border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);
+  color:var(--ash);font-family:var(--font-m);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;backdrop-filter:blur(8px);
+}
+.inv-btn-back:hover{border-color:rgba(255,255,255,.3);color:var(--ivory)}
+.inv-btn-pay{
+  flex:2;min-width:180px;padding:.9rem 2rem;border-radius:100px;
+  border:1px solid rgba(201,168,76,.6);
+  background:linear-gradient(145deg,rgba(201,168,76,.2),rgba(201,168,76,.08));
+  color:var(--gold);font-family:var(--font-m);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;backdrop-filter:blur(16px);
+  box-shadow:0 6px 24px rgba(201,168,76,.18),inset 0 1px 0 rgba(201,168,76,.35),inset 0 2px 0 rgba(255,255,255,.08);
+  position:relative;overflow:hidden;
+}
+.inv-btn-pay::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.1),transparent);border-radius:100px 100px 0 0;pointer-events:none}
+.inv-btn-pay:hover{background:linear-gradient(145deg,rgba(201,168,76,.32),rgba(201,168,76,.16));transform:translateY(-2px);box-shadow:0 12px 36px rgba(201,168,76,.28),inset 0 1px 0 rgba(201,168,76,.45)}
+.inv-btn-pay:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.inv-feedback{margin-top:.85rem;font-size:.82rem;min-height:1rem}
+.inv-feedback.err{color:var(--red)}.inv-feedback.ok{color:var(--green)}
+
+/* Confirmation */
+.inv-confirmation{display:none;margin-top:2rem;border-radius:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:2.5rem;text-align:center}
+.inv-conf-star{font-size:3rem;display:block;margin-bottom:1rem;animation:pulse 2.5s ease-in-out infinite;color:var(--gold)}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.75}}
+.inv-conf-title{font-family:var(--font-d);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:var(--ivory);margin-bottom:1rem;line-height:1.05}
+.inv-conf-title em{font-style:italic;color:var(--gold)}
+.inv-conf-msg{color:rgba(240,237,230,.72);font-size:.9rem;line-height:1.8;margin-bottom:2rem;max-width:460px;margin-inline:auto}
+.inv-conf-pay{max-width:460px;margin:0 auto 2rem;padding:1.5rem;border-radius:16px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.25);text-align:left}
+.inv-conf-pay h4{font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem}
+.inv-conf-pay p{font-size:.87rem;color:rgba(240,237,230,.78);line-height:1.8}
+.inv-conf-pay strong{color:var(--ivory)}
+.inv-conf-pay code{font-family:var(--font-m);background:rgba(255,255,255,.08);padding:.12rem .5rem;border-radius:5px;font-size:.82rem;color:var(--gold)}
+.inv-conf-pay a{color:var(--gold);border-bottom:1px solid rgba(201,168,76,.3)}
+.inv-conf-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.75rem}
+.cal-link-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.75rem;border-radius:100px;background:rgba(66,133,244,.15);border:1px solid rgba(66,133,244,.4);color:#7ab4f8;font-family:var(--font-m);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.cal-link-btn:hover{background:rgba(66,133,244,.25);transform:translateY(-2px)}
+.back-home-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.75rem;border-radius:100px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--ash);font-family:var(--font-m);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.back-home-btn:hover{border-color:rgba(255,255,255,.28);color:var(--ivory)}
+
+@media(max-width:560px){.inv-body{padding:1.5rem}.inv-meta{grid-template-columns:1fr}.inv-actions{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="grain"></div>
+
+<nav class="nav">
+  <span class="nav-logo">CC</span>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 14 14"><path d="M9 2L4 7l5 5"/></svg>
+    Back to Portfolio
+  </a>
+</nav>
+
+<div class="page">
+  <div class="hero-header">
+    <span class="h-eyebrow">Calvin Christian · Bali, Indonesia</span>
+    <h1 class="h-title">Book a<br/><em>Session</em></h1>
+    <p class="h-sub">Choose your service, pick an available date, and we'll get to work.</p>
+  </div>
+
+  <!-- SERVICE TABS -->
+  <div class="service-tabs">
+    <button class="tab-pill active" data-tab="photography"><span class="tab-icon">📷</span>Photography</button>
+    <button class="tab-pill"        data-tab="videography"><span class="tab-icon">🎥</span>Videography</button>
+    <button class="tab-pill"        data-tab="editing"><span class="tab-icon">✂️</span>Video Editing</button>
+  </div>
+
+  <!-- ══ PANEL 1: PHOTOGRAPHY ══ -->
+  <div class="panel active" id="panel-photography">
+    <div class="glass-card"><div class="card-inner">
+      <div class="panel-header">
+        <h2 class="panel-title">Photography<br/><em>Booking</em></h2>
+        <span class="panel-badge">from Rp 1.000.000 / day</span>
+      </div>
+      <span class="s-label">Choose your theme</span>
+      <div class="chips" id="photo-themes">
+        <button class="chip" data-val="Property">Property</button>
+        <button class="chip" data-val="Wedding">Wedding</button>
+        <button class="chip" data-val="Lifestyle">Lifestyle</button>
+        <button class="chip" data-val="Portrait">Portrait</button>
+        <button class="chip" data-val="Commercial">Commercial</button>
+      </div>
+      <div class="price-bar" id="photo-price">
+        <div class="pb-left">
+          <div class="pb-label" id="photo-price-label">Photography</div>
+          <div class="pb-price">Rp 1.000.000 / day</div>
+          <div class="pb-note">Starting price · final quote based on session length &amp; location</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- Calendar -->
+      <span class="s-label">Pick an available date</span>
+      <div class="cal-section" id="ph-cal"></div>
+
+      <div class="divider"></div>
+      <span class="s-label">Your details</span>
+      <div class="form-row">
+        <div class="field"><label>Full Name *</label><input type="text" id="ph-name" placeholder="Your full name"/></div>
+        <div class="field"><label>Email *</label><input type="email" id="ph-email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" id="ph-phone" placeholder="+62 8xx xxxx xxxx"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="field"><label>Location &amp; Notes</label><textarea id="ph-notes" rows="3" placeholder="Where is the shoot? Any references, special requests…"></textarea></div>
+      </div>
+      <div class="divider"></div>
+      <span class="s-label">Payment method</span>
+      <div class="pay-grid" id="photo-pay">
+        <button class="pay-card" data-pay="bank"><span class="pay-icon">🏦</span><div class="pay-info"><span class="pay-name">Bank Transfer</span><span class="pay-detail">Blu by BCA</span><span class="pay-detail">007002991116</span></div></button>
+        <button class="pay-card" data-pay="paypal"><span class="pay-icon">🌍</span><div class="pay-info"><span class="pay-name">PayPal</span><span class="pay-detail">calvinchristian15k1</span><span class="pay-detail">@gmail.com</span></div></button>
+      </div>
+      <div style="margin-top:2rem">
+        <button class="btn-submit" id="ph-submit" onclick="showInvoice('photography')" disabled>
+          Review Invoice <span class="btn-arrow">→</span>
+        </button>
+      </div>
+      <div class="feedback" id="ph-feedback"></div>
+    </div></div>
+  </div>
+
+  <!-- ══ PANEL 2: VIDEOGRAPHY ══ -->
+  <div class="panel" id="panel-videography">
+    <div class="glass-card"><div class="card-inner">
+      <div class="panel-header">
+        <h2 class="panel-title">Videography<br/><em>Booking</em></h2>
+        <span class="panel-badge">from Rp 1.000.000</span>
+      </div>
+      <span class="s-label">Choose your theme</span>
+      <div class="chips" id="video-themes">
+        <button class="chip" data-val="Property">Property</button>
+        <button class="chip" data-val="Wedding">Wedding</button>
+        <button class="chip" data-val="Lifestyle">Lifestyle</button>
+        <button class="chip" data-val="Commercial">Commercial</button>
+        <button class="chip" data-val="Documenter">Documenter</button>
+        <button class="chip" data-val="Event">Event</button>
+      </div>
+      <div class="price-bar" id="video-price">
+        <div class="pb-left">
+          <div class="pb-label" id="video-price-label">Videography</div>
+          <div class="pb-price" id="video-price-amt">—</div>
+          <div class="pb-note" id="video-price-note"></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <span class="s-label">Pick an available date</span>
+      <div class="cal-section" id="vi-cal"></div>
+      <div class="divider"></div>
+      <span class="s-label">Your details</span>
+      <div class="form-row">
+        <div class="field"><label>Full Name *</label><input type="text" id="vi-name" placeholder="Your full name"/></div>
+        <div class="field"><label>Email *</label><input type="email" id="vi-email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" id="vi-phone" placeholder="+62 8xx xxxx xxxx"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="field"><label>Venue &amp; Notes</label><textarea id="vi-notes" rows="3" placeholder="Venue, duration, references, special requests…"></textarea></div>
+      </div>
+      <div class="divider"></div>
+      <span class="s-label">Payment method</span>
+      <div class="pay-grid" id="video-pay">
+        <button class="pay-card" data-pay="bank"><span class="pay-icon">🏦</span><div class="pay-info"><span class="pay-name">Bank Transfer</span><span class="pay-detail">Blu by BCA</span><span class="pay-detail">007002991116</span></div></button>
+        <button class="pay-card" data-pay="paypal"><span class="pay-icon">🌍</span><div class="pay-info"><span class="pay-name">PayPal</span><span class="pay-detail">calvinchristian15k1</span><span class="pay-detail">@gmail.com</span></div></button>
+      </div>
+      <div style="margin-top:2rem">
+        <button class="btn-submit" id="vi-submit" onclick="showInvoice('videography')" disabled>
+          Review Invoice <span class="btn-arrow">→</span>
+        </button>
+      </div>
+      <div class="feedback" id="vi-feedback"></div>
+    </div></div>
+  </div>
+
+  <!-- ══ PANEL 3: VIDEO EDITING ══ -->
+  <div class="panel" id="panel-editing">
+    <div class="glass-card"><div class="card-inner">
+      <div class="panel-header">
+        <h2 class="panel-title">Video Editing<br/><em>Booking</em></h2>
+        <span class="panel-badge">from Rp 2.000.000</span>
+      </div>
+      <span class="s-label">Choose your package</span>
+      <div class="pkg-grid" id="edit-pkgs">
+        <button class="pkg-card" data-pkg="full">
+          <div class="pkg-name">Full Package</div>
+          <div class="pkg-sub">Assembling &amp; Cutting · Colour Grading · Typography · Motion Graphics · Sound Mixing &amp; Audio Enhancement</div>
+          <div class="pkg-price">from Rp 2.000.000</div>
+        </button>
+        <button class="pkg-card" data-pkg="basic">
+          <div class="pkg-name">Basic Cut</div>
+          <div class="pkg-sub">Assembling &amp; Cutting only — clean timeline, no colour grading or motion graphics.</div>
+          <div class="pkg-price">Custom Quote</div>
+        </button>
+      </div>
+      <div id="edit-length-wrap" style="display:none">
+        <span class="s-label">Video length</span>
+        <div class="chips" id="edit-length">
+          <button class="chip" data-val="Short (under 5 min)">Short · under 5 min</button>
+          <button class="chip" data-val="Medium (5–15 min)">Medium · 5–15 min</button>
+          <button class="chip" data-val="Long (15 min+)">Long · 15 min+</button>
+        </div>
+      </div>
+      <div class="price-bar" id="edit-price">
+        <div class="pb-left">
+          <div class="pb-label" id="edit-price-label">Video Editing</div>
+          <div class="pb-price" id="edit-price-amt">—</div>
+          <div class="pb-note" id="edit-price-note"></div>
+        </div>
+      </div>
+      <div class="content-field" id="edit-content-wrap">
+        <span class="s-label">What type of content is this? *</span>
+        <div class="form-row full">
+          <div class="field"><textarea id="edit-content" rows="3" placeholder="e.g. Wedding highlight reel, travel vlog, product promo, short documentary, Instagram Reel…"></textarea></div>
+        </div>
+      </div>
+
+      <!-- Delivery card -->
+      <div id="edit-delivery-wrap" style="display:none">
+        <span class="s-label" style="margin-top:1.75rem">Footage hand-off date</span>
+        <div class="form-row" style="margin-bottom:.5rem">
+          <div class="field">
+            <label>When will you send me the footage?</label>
+            <input type="date" id="ed-date" onchange="updateDelivery()"/>
+          </div>
+          <div class="field" style="justify-content:flex-end;align-items:center">
+            <label class="urgent-toggle" for="ed-urgent">
+              <input type="checkbox" id="ed-urgent" onchange="updateDelivery()"/>
+              <span class="urgent-track"><span class="urgent-thumb"></span></span>
+              <span class="urgent-labels">
+                <span class="urgent-text">Rush Delivery</span>
+                <span class="urgent-surcharge">+50% surcharge</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="delivery-card" id="ed-delivery-card" style="display:none">
+          <div class="delivery-row">
+            <div>
+              <div class="delivery-label">Estimated Delivery</div>
+              <div class="delivery-date-val" id="ed-delivery-date">—</div>
+              <div class="delivery-note" id="ed-delivery-note"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <span class="s-label">Your details</span>
+      <div class="form-row">
+        <div class="field"><label>Full Name *</label><input type="text" id="ed-name" placeholder="Your full name"/></div>
+        <div class="field"><label>Email *</label><input type="email" id="ed-email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" id="ed-phone" placeholder="+62 8xx xxxx xxxx"/></div>
+      </div>
+      <div class="form-row full">
+        <div class="field"><label>Additional Notes</label><textarea id="ed-notes" rows="3" placeholder="How will you deliver footage? WeTransfer, Google Drive, USB…"></textarea></div>
+      </div>
+      <div class="divider"></div>
+      <span class="s-label">Payment method</span>
+      <div class="pay-grid" id="edit-pay">
+        <button class="pay-card" data-pay="bank"><span class="pay-icon">🏦</span><div class="pay-info"><span class="pay-name">Bank Transfer</span><span class="pay-detail">Blu by BCA</span><span class="pay-detail">007002991116</span></div></button>
+        <button class="pay-card" data-pay="paypal"><span class="pay-icon">🌍</span><div class="pay-info"><span class="pay-name">PayPal</span><span class="pay-detail">calvinchristian15k1</span><span class="pay-detail">@gmail.com</span></div></button>
+      </div>
+      <div style="margin-top:2rem">
+        <button class="btn-submit" id="ed-submit" onclick="showInvoice('editing')" disabled>
+          Review Invoice <span class="btn-arrow">→</span>
+        </button>
+      </div>
+      <div class="feedback" id="ed-feedback"></div>
+    </div></div>
+  </div>
+</div><!-- /.page -->
+
+<!-- ══════════════════════════════════
+     INVOICE OVERLAY
+══════════════════════════════════ -->
+<div class="inv-overlay" id="invoiceOverlay">
+  <div class="inv-wrap">
+
+    <!-- Invoice Card -->
+    <div class="inv-card" id="invCard">
+      <div class="inv-gold-line"></div>
+      <div class="inv-body">
+
+        <!-- Header -->
+        <div class="inv-header">
+          <div>
+            <div style="font-family:var(--font-m);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem">Invoice / Booking Summary</div>
+            <div class="inv-brand-name">Calvin <em>Christian</em></div>
+            <div class="inv-brand-sub">Bali, Indonesia · youredit2026@gmail.com</div>
+          </div>
+          <div style="text-align:right">
+            <div class="inv-num-label">Invoice No.</div>
+            <div class="inv-num" id="invNum">#—</div>
+            <div class="inv-date-str" id="invDateStr"></div>
+          </div>
+        </div>
+
+        <div class="inv-divider"></div>
+
+        <!-- Client + Service -->
+        <div class="inv-meta">
+          <div>
+            <div class="inv-meta-block-label">Billed To</div>
+            <div class="inv-meta-val" id="invClientName"></div>
+            <div class="inv-meta-sub" id="invClientEmail"></div>
+            <div class="inv-meta-sub" id="invClientPhone"></div>
+          </div>
+          <div>
+            <div class="inv-meta-block-label">Service Details</div>
+            <div class="inv-meta-val" id="invServiceName"></div>
+            <div class="inv-meta-sub" id="invServiceTheme"></div>
+            <div class="inv-meta-sub" id="invServiceDate"></div>
+          </div>
+        </div>
+
+        <!-- Line items -->
+        <div class="inv-table">
+          <div class="inv-table-head">
+            <div class="inv-th">Description</div>
+            <div class="inv-th">Amount</div>
+          </div>
+          <div id="invLineItems"></div>
+          <div class="inv-total-row">
+            <div class="inv-total-label">Total (Starting Price)</div>
+            <div class="inv-total-amt" id="invTotal"></div>
+          </div>
+        </div>
+
+        <!-- Deposit notice -->
+        <div class="inv-deposit">
+          A <strong>50% deposit</strong> is required to secure your booking date. The remaining balance is due upon delivery of the final files.
+        </div>
+
+        <!-- Payment method -->
+        <div class="inv-pay-box">
+          <div class="inv-pay-box-label">Payment Method &amp; Instructions</div>
+          <div class="inv-pay-detail" id="invPayDetail"></div>
+        </div>
+
+        <!-- Notes -->
+        <div class="inv-notes-box" id="invNotesBox">
+          <div class="inv-meta-block-label">Notes</div>
+          <div id="invNotes" style="font-size:.85rem;color:rgba(240,237,230,.7);line-height:1.7"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="inv-actions">
+          <button class="inv-btn-back" onclick="closeInvoice()">← Edit Booking</button>
+          <button class="inv-btn-pay" id="invPayBtn" onclick="confirmAndPay()">
+            Confirm &amp; Pay Deposit →
+          </button>
+        </div>
+        <div class="inv-feedback" id="invFeedback"></div>
+      </div>
+    </div>
+
+    <!-- Confirmation screen (shown after submit) -->
+    <div class="inv-confirmation" id="invConfirmation">
+      <span class="inv-conf-star">✦</span>
+      <h2 class="inv-conf-title">Booking <em>Confirmed!</em></h2>
+      <p class="inv-conf-msg" id="invConfMsg"></p>
+      <div class="inv-conf-pay" id="invConfPay"></div>
+      <div class="inv-conf-actions">
+        <a class="cal-link-btn" id="invCalLink" href="#" target="_blank">📅 Add to Google Calendar</a>
+        <a class="back-home-btn" href="index.html">← Back to Portfolio</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API_URL = 'php/api_booking.php';
+
+/* ══════════════════════
+   STATE
+══════════════════════ */
+const ST = {
+  photography: { theme:null, date:null, payment:null },
+  videography: { theme:null, date:null, payment:null },
+  editing:     { pkg:null, length:null, content:'', date:null, urgent:false, payment:null },
+};
+let _invoiceService = null;
+
+/* ══════════════════════
+   PRICING
+══════════════════════ */
+const PRICES = {
+  photography: { base:'Rp 1.000.000 / day', note:'Starting price per shoot day.' },
+  videography: {
+    Property:   { amt:'Rp 3.000.000',  note:'Property tour & showcase video.' },
+    Wedding:    { amt:'Rp 10.000.000', note:'Full wedding coverage, editing & delivery.' },
+    Lifestyle:  { amt:'Rp 1.000.000',  note:'Lifestyle & personal brand content.' },
+    Commercial: { amt:'Rp 5.000.000',  note:'Brand & commercial production.' },
+    Documenter: { amt:'Rp 3.000.000',  note:'Short-form documentary.' },
+    Event:      { amt:'Rp 2.000.000',  note:'Event coverage film.' },
+  },
+  editing: {
+    full:  { short:'Rp 2.000.000', medium:'Rp 3.500.000', long:'Rp 5.000.000' },
+    basic: { short:'Custom Quote', medium:'Custom Quote',  long:'Custom Quote'  },
+  },
+};
+
+/* ══════════════════════
+   CALENDAR
+══════════════════════ */
+const calendars = {}; // { service: { year, month, blocked:[], selected:null } }
+
+async function buildCalendar(service, containerId) {
+  const now = new Date();
+  const state = calendars[service] = { year:now.getFullYear(), month:now.getMonth(), blocked:[], selected:null };
+  await fetchBlocked(service);
+  renderCalendar(service, containerId);
+}
+
+async function fetchBlocked(service) {
+  if (service === 'editing') { calendars[service].blocked = []; return; }
+  try {
+    const res  = await fetch(`php/api_booking.php?service=${service}`);
+    const json = await res.json();
+    calendars[service].blocked = json.blocked_dates || [];
+  } catch(e) { calendars[service].blocked = []; }
+}
+
+function renderCalendar(service, containerId) {
+  const cs   = calendars[service];
+  const wrap = document.getElementById(containerId);
+  if (!wrap) return;
+
+  const year = cs.year, month = cs.month;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const monthName = new Date(year, month, 1).toLocaleString('en',{month:'long',year:'numeric'});
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  let html = `
+    <div class="cal-head">
+      <div class="cal-title">${monthName}</div>
+      <div class="cal-nav">
+        <button onclick="calNav('${service}','${containerId}',-1)" title="Previous month">‹</button>
+        <button onclick="calNav('${service}','${containerId}',1)"  title="Next month">›</button>
+      </div>
+    </div>
+    <div class="cal-grid">
+      ${days.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}
+      ${Array(firstDay).fill('<div class="cal-day cal-empty"></div>').join('')}`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dt  = new Date(year, month, d); dt.setHours(0,0,0,0);
+    const iso = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isTod = dt.getTime() === today.getTime();
+    const isPst = dt < today;
+    const isBlk = cs.blocked.includes(iso);
+    const isSel = cs.selected === iso;
+
+    let cls = 'cal-day';
+    if (isTod)       cls += ' cal-today';
+    if (isPst)       cls += ' cal-past';
+    else if (isBlk)  cls += ' cal-blocked';
+    else if (isSel)  cls += ' cal-sel';
+
+    const click = (!isPst && !isBlk) ? `onclick="selectDate('${service}','${containerId}','${iso}')"` : '';
+    const ttip  = isBlk ? 'title="Already booked — date unavailable"' : isTod ? 'title="Today"' : '';
+    const inner = isBlk ? `${d}<span class="cal-full-badge">FULL</span>` : `${d}`;
+    html += `<div class="${cls}" ${click} ${ttip}>${inner}</div>`;
+  }
+
+  html += `</div>
+    <div class="cal-legend">
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(201,168,76,.25);border:1px solid rgba(201,168,76,.55)"></div> Selected</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(224,82,82,.12);border:1px solid rgba(224,82,82,.35)"></div> Fully Booked</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)"></div> Available</div>
+    </div>`;
+
+  wrap.innerHTML = html;
+}
+
+function calNav(service, containerId, dir) {
+  const cs = calendars[service];
+  cs.month += dir;
+  if (cs.month > 11) { cs.month = 0; cs.year++; }
+  if (cs.month < 0)  { cs.month = 11; cs.year--; }
+  fetchBlocked(service).then(() => renderCalendar(service, containerId));
+}
+
+function selectDate(service, containerId, iso) {
+  calendars[service].selected = iso;
+  ST[service].date = iso;
+  renderCalendar(service, containerId);
+  checkSubmit(service);
+}
+
+/* ══════════════════════
+   TAB SWITCHING
+══════════════════════ */
+document.querySelectorAll('.tab-pill').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab-pill').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const svc = tab.dataset.tab;
+    document.getElementById('panel-' + svc).classList.add('active');
+    // Lazy-init calendar
+    const calId = { photography:'ph-cal', videography:'vi-cal' }[svc];
+    if (calId && !calendars[svc]) buildCalendar(svc, calId);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+// Init photography calendar on load
+buildCalendar('photography', 'ph-cal');
+
+/* ══════════════════════
+   CHIP SELECTORS
+══════════════════════ */
+function makeChips(containerId, onSelect) {
+  document.getElementById(containerId)?.querySelectorAll('.chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById(containerId).querySelectorAll('.chip').forEach(b => b.classList.remove('sel'));
+      btn.classList.add('sel');
+      onSelect(btn.dataset.val);
+    });
+  });
+}
+function makePayCards(containerId, service) {
+  document.getElementById(containerId)?.querySelectorAll('.pay-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.getElementById(containerId).querySelectorAll('.pay-card').forEach(c => c.classList.remove('sel'));
+      card.classList.add('sel');
+      ST[service].payment = card.dataset.pay;
+      checkSubmit(service);
+    });
+  });
+}
+
+// Photography
+makeChips('photo-themes', val => {
+  ST.photography.theme = val;
+  document.getElementById('photo-price-label').textContent = 'Photography · ' + val;
+  document.getElementById('photo-price').classList.add('show');
+  checkSubmit('photography');
+});
+makePayCards('photo-pay','photography');
+
+// Videography
+makeChips('video-themes', val => {
+  ST.videography.theme = val;
+  const p = PRICES.videography[val] || {amt:'Custom Quote',note:''};
+  document.getElementById('video-price-label').textContent = 'Videography · ' + val;
+  document.getElementById('video-price-amt').textContent   = p.amt;
+  document.getElementById('video-price-note').innerHTML    = p.note;
+  document.getElementById('video-price').classList.add('show');
+  checkSubmit('videography');
+});
+makePayCards('video-pay','videography');
+
+// Editing
+document.getElementById('edit-pkgs').querySelectorAll('.pkg-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.getElementById('edit-pkgs').querySelectorAll('.pkg-card').forEach(c => c.classList.remove('sel'));
+    card.classList.add('sel');
+    ST.editing.pkg = card.dataset.pkg;
+    ST.editing.length = null;
+    document.getElementById('edit-length-wrap').style.display = 'block';
+    document.getElementById('edit-content-wrap').classList.add('show');
+    document.getElementById('edit-delivery-wrap').style.display = 'block';
+    document.getElementById('edit-price').classList.remove('show');
+    document.getElementById('edit-length').querySelectorAll('.chip').forEach(c => c.classList.remove('sel'));
+    checkSubmit('editing');
+  });
+});
+makeChips('edit-length', val => {
+  ST.editing.length = val;
+  const pkg = ST.editing.pkg;
+  const key = val.startsWith('Short') ? 'short' : val.startsWith('Medium') ? 'medium' : 'long';
+  const amt = PRICES.editing[pkg]?.[key] || 'Custom Quote';
+  const note = pkg === 'full'
+    ? (key === 'short' ? 'Short-form (under 5 min).' : key === 'medium' ? 'Medium-form (5–15 min).' : 'Long-form (15 min+).')
+    : 'Priced by footage length.';
+  document.getElementById('edit-price-label').textContent = 'Video Editing · ' + (pkg==='full'?'Full Package':'Basic Cut');
+  document.getElementById('edit-price-amt').textContent   = amt;
+  document.getElementById('edit-price-note').textContent  = note;
+  document.getElementById('edit-price').classList.add('show');
+  checkSubmit('editing');
+});
+document.getElementById('edit-content')?.addEventListener('input', e => {
+  ST.editing.content = e.target.value.trim();
+  checkSubmit('editing');
+});
+makePayCards('edit-pay','editing');
+
+/* ══════════════════════
+   DELIVERY DATE (Editing)
+══════════════════════ */
+function updateDelivery() {
+  const dateVal = document.getElementById('ed-date').value;
+  const urgent  = document.getElementById('ed-urgent').checked;
+  ST.editing.date   = dateVal || null;
+  ST.editing.urgent = urgent;
+
+  const card = document.getElementById('ed-delivery-card');
+  if (!dateVal) { card.style.display = 'none'; checkSubmit('editing'); return; }
+
+  const dt = new Date(dateVal + 'T00:00:00');
+  dt.setDate(dt.getDate() + (urgent ? 7 : 14));
+  const fmt = dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  const pkg = ST.editing.pkg;
+  const lenKey = ST.editing.length?.startsWith('Short') ? 'short' : ST.editing.length?.startsWith('Medium') ? 'medium' : 'long';
+  const baseAmt = pkg ? (PRICES.editing[pkg]?.[lenKey] || 'Custom Quote') : 'Custom Quote';
+  const urgentAmt = urgent && baseAmt !== 'Custom Quote'
+    ? 'Rp ' + Math.round(parseInt(baseAmt.replace(/\D/g,'')) * 1.5).toLocaleString('id')
+    : baseAmt;
+
+  document.getElementById('ed-delivery-date').textContent = fmt;
+  document.getElementById('ed-delivery-note').textContent = urgent
+    ? `⚡ Rush delivery (1 week) · Price: ${urgentAmt} (+50%)`
+    : `📅 Standard delivery (2 weeks) · Price: ${baseAmt}`;
+  card.style.display = 'block';
+  checkSubmit('editing');
+}
+
+/* ══════════════════════
+   CHECK SUBMIT
+══════════════════════ */
+function checkSubmit(service) {
+  const s = ST[service];
+  let ok = false;
+  if (service === 'photography') ok = !!s.theme && !!s.date && !!s.payment;
+  if (service === 'videography') ok = !!s.theme && !!s.date && !!s.payment;
+  if (service === 'editing')     ok = !!s.pkg && !!s.length && s.content.length > 3 && !!s.date && !!s.payment;
+  const ids = { photography:'ph-submit', videography:'vi-submit', editing:'ed-submit' };
+  document.getElementById(ids[service]).disabled = !ok;
+}
+
+/* ══════════════════════
+   SHOW INVOICE
+══════════════════════ */
+function showInvoice(service) {
+  _invoiceService = service;
+  const s = ST[service];
+  const prefix = { photography:'ph', videography:'vi', editing:'ed' }[service];
+
+  const name  = document.getElementById(prefix+'-name').value.trim();
+  const email = document.getElementById(prefix+'-email').value.trim();
+  const phone = document.getElementById(prefix+'-phone').value.trim();
+  const notes = document.getElementById(prefix+'-notes').value.trim();
+
+  if (!name || !email) {
+    const fb = document.getElementById(prefix+'-feedback');
+    fb.className = 'feedback err';
+    fb.textContent = '⚠ Please fill in your name and email before reviewing the invoice.';
+    return;
+  }
+
+  // Compute price
+  let priceAmt = '—', priceNote = '', lineItems = [];
+
+  if (service === 'photography') {
+    priceAmt = PRICES.photography.base;
+    priceNote = PRICES.photography.note;
+    lineItems = [{ desc: `Photography · ${s.theme}`, sub: `Date: ${formatDate(s.date)}`, amt: 'Rp 1.000.000 / day' }];
+  } else if (service === 'videography') {
+    const p = PRICES.videography[s.theme] || {amt:'Custom Quote', note:''};
+    priceAmt = p.amt; priceNote = p.note;
+    lineItems = [{ desc: `Videography · ${s.theme}`, sub: `Date: ${formatDate(s.date)}`, amt: p.amt }];
+  } else {
+    const lenKey = s.length?.startsWith('Short') ? 'short' : s.length?.startsWith('Medium') ? 'medium' : 'long';
+    let base = PRICES.editing[s.pkg]?.[lenKey] || 'Custom Quote';
+    if (s.urgent && base !== 'Custom Quote') {
+      const num = parseInt(base.replace(/\D/g,''));
+      const rush = Math.round(num * 1.5);
+      priceAmt = 'Rp ' + rush.toLocaleString('id');
+      lineItems = [
+        { desc: `Video Editing · ${s.pkg==='full'?'Full Package':'Basic Cut'}`, sub: s.length, amt: base },
+        { desc: '⚡ Rush Delivery Surcharge', sub: '+50% for 1-week turnaround', amt: 'Rp ' + Math.round(num*.5).toLocaleString('id') },
+      ];
+    } else {
+      priceAmt = base;
+      lineItems = [{ desc: `Video Editing · ${s.pkg==='full'?'Full Package':'Basic Cut'}`, sub: s.length, amt: base }];
+    }
+    const dt = new Date(s.date + 'T00:00:00');
+    dt.setDate(dt.getDate() + (s.urgent ? 7 : 14));
+    lineItems.push({ desc: s.urgent ? '⚡ Delivery (1 week)' : '📅 Delivery (2 weeks)', sub: dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}), amt: '' });
+  }
+
+  // Populate invoice
+  const invNum = '#INV-' + Date.now().toString().slice(-6);
+  document.getElementById('invNum').textContent     = invNum;
+  document.getElementById('invDateStr').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('invClientName').textContent  = name;
+  document.getElementById('invClientEmail').textContent = email;
+  document.getElementById('invClientPhone').textContent = phone || '';
+  document.getElementById('invClientPhone').style.display = phone ? 'block' : 'none';
+
+  const svcLabel = service === 'photography' ? 'Photography' : service === 'videography' ? 'Videography' : 'Video Editing';
+  document.getElementById('invServiceName').textContent  = svcLabel;
+  document.getElementById('invServiceTheme').textContent = s.theme || (s.pkg === 'full' ? 'Full Package' : 'Basic Cut') || '';
+  document.getElementById('invServiceDate').textContent  = service !== 'editing' ? `Date: ${formatDate(s.date)}` : `Footage hand-off: ${formatDate(s.date)}`;
+
+  // Line items
+  document.getElementById('invLineItems').innerHTML = lineItems.map(l => `
+    <div class="inv-line">
+      <div class="inv-line-desc">${esc(l.desc)}${l.sub ? `<small>${esc(l.sub)}</small>` : ''}</div>
+      <div class="inv-line-amt">${esc(l.amt)}</div>
+    </div>`).join('');
+  document.getElementById('invTotal').textContent = priceAmt;
+
+  // Payment detail
+  const payHTML = s.payment === 'bank'
+    ? `<strong>Bank Transfer — Blu by BCA</strong><br/>Account No: <code>007002991116</code><br/>Account Name: <strong>Calvin Christian</strong><br/><br/>Transfer your 50% deposit, then email your proof of payment to <strong>youredit2026@gmail.com</strong>.`
+    : `<strong>PayPal</strong><br/>Send your 50% deposit to: <code>calvinchristian15k1@gmail.com</code><br/>Include your name and booking details in the PayPal note, then email confirmation to <strong>youredit2026@gmail.com</strong>.`;
+  document.getElementById('invPayDetail').innerHTML = payHTML;
+
+  // Notes
+  if (notes) {
+    document.getElementById('invNotes').textContent = notes;
+    document.getElementById('invNotesBox').classList.add('show');
+  } else {
+    document.getElementById('invNotesBox').classList.remove('show');
+  }
+
+  // Reset feedback
+  document.getElementById('invFeedback').className = 'inv-feedback';
+  document.getElementById('invFeedback').textContent = '';
+  document.getElementById('invPayBtn').disabled = false;
+  document.getElementById('invPayBtn').textContent = 'Confirm & Pay Deposit →';
+  document.getElementById('invCard').style.display = 'block';
+  document.getElementById('invConfirmation').style.display = 'none';
+
+  // Show overlay
+  document.getElementById('invoiceOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeInvoice() {
+  document.getElementById('invoiceOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* ══════════════════════
+   CONFIRM & PAY
+══════════════════════ */
+async function confirmAndPay() {
+  const service = _invoiceService;
+  const s = ST[service];
+  const prefix = { photography:'ph', videography:'vi', editing:'ed' }[service];
+  const fb  = document.getElementById('invFeedback');
+  const btn = document.getElementById('invPayBtn');
+  fb.className = 'inv-feedback'; fb.textContent = '';
+  btn.disabled = true; btn.textContent = 'Processing…';
+
+  const name  = document.getElementById(prefix+'-name').value.trim();
+  const email = document.getElementById(prefix+'-email').value.trim();
+  const phone = document.getElementById(prefix+'-phone').value.trim();
+  const notes = document.getElementById(prefix+'-notes').value.trim();
+
+  // Compute price string
+  let priceStr = '—';
+  if (service === 'photography') { priceStr = PRICES.photography.base; }
+  else if (service === 'videography') { priceStr = PRICES.videography[s.theme]?.amt || 'Custom Quote'; }
+  else {
+    const lk = s.length?.startsWith('Short') ? 'short' : s.length?.startsWith('Medium') ? 'medium' : 'long';
+    const base = PRICES.editing[s.pkg]?.[lk] || 'Custom Quote';
+    if (s.urgent && base !== 'Custom Quote') {
+      priceStr = 'Rp ' + Math.round(parseInt(base.replace(/\D/g,''))*1.5).toLocaleString('id');
+    } else { priceStr = base; }
+  }
+
+  const payload = {
+    service,
+    theme:         s.theme || '',
+    package:       s.pkg || '',
+    client_name:   name,
+    client_email:  email,
+    client_phone:  phone,
+    booked_date:   s.date,
+    payment_method: s.payment,
+    total_price:   priceStr,
+    urgent:        s.urgent ? 1 : 0,
+    notes,
+    content_type:  s.content || '',
+  };
+
+  try {
+    const res  = await fetch(API_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || 'Submission failed');
+
+    // Show confirmation
+    document.getElementById('invCard').style.display = 'none';
+    const conf = document.getElementById('invConfirmation');
+    conf.style.display = 'block';
+
+    document.getElementById('invConfMsg').textContent =
+      `Thank you ${name}! Your ${service} booking for ${formatDate(s.date)} has been received. I'll reach out to ${email} within 24 hours to confirm.`;
+
+    const payInstr = s.payment === 'bank'
+      ? `<h4>🏦 Bank Transfer Instructions</h4><p>Bank: <strong>Blu by BCA</strong><br/>Account No: <code>007002991116</code><br/>Account Name: <strong>Calvin Christian</strong><br/><br/>Transfer your <strong>50% deposit</strong>, then email proof to <a href="mailto:youredit2026@gmail.com">youredit2026@gmail.com</a>.</p>`
+      : `<h4>🌍 PayPal Instructions</h4><p>Send your <strong>50% deposit</strong> to: <code>calvinchristian15k1@gmail.com</code><br/>Include your name &amp; booking details in the note, then email confirmation to <a href="mailto:youredit2026@gmail.com">youredit2026@gmail.com</a>.</p>`;
+    document.getElementById('invConfPay').innerHTML = payInstr;
+
+    if (json.calendar_link) {
+      document.getElementById('invCalLink').href = json.calendar_link;
+      document.getElementById('invCalLink').style.display = 'inline-flex';
+    } else {
+      document.getElementById('invCalLink').style.display = 'none';
+    }
+
+    conf.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  } catch(err) {
+    fb.className = 'inv-feedback err';
+    fb.textContent = '✕ ' + (err.message || 'Something went wrong. Please email youredit2026@gmail.com directly.');
+    btn.disabled = false; btn.textContent = 'Confirm & Pay Deposit →';
+  }
+}
+
+/* ══════════════════════
+   HELPERS
+══════════════════════ */
+function formatDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Close invoice on overlay click
+document.getElementById('invoiceOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('invoiceOverlay')) closeInvoice();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeInvoice(); });
+
+// Track visit
+try { fetch('php/api_track.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:'/booking',referrer:document.referrer||''})}); } catch(e){}
+</script>
+</body>
+</html>

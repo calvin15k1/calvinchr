@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calvin Christian — Photographer & Videographer, Bali</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20260719" />
+  <style>
+    /* ── Book Now: critical inline styles (cache-safe) ── */
+    .contact-email {
+      display: block !important;
+      width: fit-content;
+      margin-top: 1.25rem;
+    }
+    .book-btn-wrap {
+      display: block !important;
+      margin-top: 2.5rem !important;
+      padding-top: 2rem !important;
+      border-top: 1px solid rgba(201,168,76,0.18) !important;
+      width: fit-content;
+      min-width: 240px;
+    }
+    .book-btn {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 1.5rem !important;
+      width: 100% !important;
+      padding: 1.1rem 2rem !important;
+      position: relative !important;
+      overflow: hidden !important;
+      isolation: isolate !important;
+      border-radius: 100px !important;
+      text-decoration: none !important;
+      font-family: 'Space Mono', monospace !important;
+      font-size: 0.8rem !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      color: #c9a84c !important;
+      background: linear-gradient(145deg, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0.06) 60%, rgba(201,168,76,0.12) 100%) !important;
+      border: 1px solid rgba(201,168,76,0.48) !important;
+      backdrop-filter: blur(28px) saturate(2) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(2) !important;
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,0.08),
+        0 10px 40px rgba(201,168,76,0.2),
+        0 2px 10px rgba(0,0,0,0.5),
+        inset 0 2px 0 rgba(201,168,76,0.35),
+        inset 0 -1px 0 rgba(0,0,0,0.35),
+        inset 1px 0 0 rgba(255,255,255,0.08) !important;
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1),
+                  background 0.3s, border-color 0.3s,
+                  box-shadow 0.3s, color 0.3s !important;
+      cursor: pointer !important;
+    }
+    .book-btn::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 0; left: 0; right: 0;
+      height: 50% !important;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.16) 0%, rgba(201,168,76,0.04) 60%, transparent 100%) !important;
+      border-radius: 100px 100px 0 0 !important;
+      pointer-events: none !important;
+      z-index: 0 !important;
+    }
+    .book-btn::after {
+      content: '' !important;
+      position: absolute !important;
+      top: -40%; left: -10%;
+      width: 60%; height: 130% !important;
+      background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.04) 40%, transparent 65%) !important;
+      pointer-events: none !important;
+      z-index: 0 !important;
+    }
+    .book-btn:hover {
+      transform: translateY(-4px) !important;
+      background: linear-gradient(145deg, rgba(201,168,76,0.26) 0%, rgba(201,168,76,0.12) 60%, rgba(201,168,76,0.2) 100%) !important;
+      border-color: rgba(201,168,76,0.82) !important;
+      color: #f2d06e !important;
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,0.15),
+        0 20px 60px rgba(201,168,76,0.32),
+        0 6px 16px rgba(0,0,0,0.4),
+        inset 0 2px 0 rgba(201,168,76,0.52),
+        inset 0 -1px 0 rgba(0,0,0,0.25),
+        inset 1px 0 0 rgba(255,255,255,0.14) !important;
+    }
+    .book-btn-text, .book-arrow {
+      position: relative !important;
+      z-index: 1 !important;
+    }
+    .book-arrow {
+      font-size: 1.1rem !important;
+      opacity: 0.8 !important;
+      transition: transform 0.3s cubic-bezier(.22,1,.36,1), opacity 0.3s !important;
+    }
+    .book-btn:hover .book-arrow {
+      transform: translateX(6px) !important;
+      opacity: 1 !important;
+    }
+
+    /* ── Hero CTA — pill ── */
+    .hero-cta {
+      border-radius: 100px !important;
+    }
+    .hero-cta::before {
+      border-radius: 100px 100px 0 0 !important;
+    }
+
+    /* ── Nav Book Now — already pill, ensure it ── */
+    .nav-link-book {
+      border-radius: 100px !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ CURSOR ═══════════════════ -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">CC</a>
+  <ul class="nav-links">
+    <li><a href="#work" class="nav-link">Work</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+    <li><a href="booking.html" class="nav-link nav-link-book">Book Now</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<!--
+  HERO BACKGROUND VIDEO
+  ─────────────────────
+  Place your video file inside:  uploads/videos/
+  Then update the src= paths below to match your exact filename.
+
+  Supported formats:  .mp4  (recommended),  .mov,  .webm
+  Example:  src="uploads/videos/mybalifilm.mp4"
+-->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
+      <!-- Primary source — change filename to match yours -->
+      <source src="uploads/videos/hero.mp4" type="video/mp4" />
+      <!-- Optional .mov fallback for Safari -->
+      <source src="uploads/videos/hero.mov" type="video/quicktime" />
+    </video>
+    <div class="hero-video-fallback" id="heroFallback"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content" data-parallax="0.3">
+    <span class="hero-eyebrow">Bali, Indonesia</span>
+    <h1 class="hero-name">Calvin<br/><em>Christian</em></h1>
+    <p class="hero-tagline">Photographer · Videographer · Editor</p>
+    <a href="#work" class="hero-cta">View Work <span class="cta-arrow">↓</span></a>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ REEL STRIP ═══════════════════ -->
+<section class="reel-strip">
+  <div class="reel-track" id="reelTrack">
+    <span>Photography</span><span>·</span>
+    <span>Videography</span><span>·</span>
+    <span>Color Grading</span><span>·</span>
+    <span>Visual Storytelling</span><span>·</span>
+    <span>Bali</span><span>·</span>
+    <span>Photography</span><span>·</span>
+    <span>Videography</span><span>·</span>
+    <span>Color Grading</span><span>·</span>
+    <span>Visual Storytelling</span><span>·</span>
+    <span>Bali</span><span>·</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURED CAROUSEL ═══════════════════ -->
+<section class="carousel-section parallax-section" id="work">
+  <div class="section-header" data-parallax="0.15">
+    <span class="section-tag">Selected Work</span>
+    <h2 class="section-title">Stories I've<br/><em>Told</em></h2>
+  </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel" id="featuredCarousel">
+      <!-- Dynamically loaded from DB -->
+      <div class="carousel-loading">
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous">←</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn next" id="carouselNext" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section class="about parallax-section" id="about">
+  <div class="about-image-col" data-parallax="0.2">
+    <div class="about-img-wrap">
+      <img src="uploads/photos/calvin.jpg" alt="Calvin Christian — Bali Photographer" onerror="this.parentElement.classList.add('no-img')" />
+      <div class="about-img-accent"></div>
+    </div>
+  </div>
+  <div class="about-text-col" data-parallax="0.08">
+    <span class="section-tag">About</span>
+    <h2 class="about-title">Light, Motion,<br/><em>Meaning.</em></h2>
+    <p class="about-body">
+      I'm Calvin Christian — a visual storyteller based in Bali, Indonesia. 
+      I work at the intersection of photography, videography, and post-production 
+      to create images and films that hold something true about a moment.
+    </p>
+    <p class="about-body">
+      From rice terraces at dawn to intimate wedding ceremonies, from brand films 
+      to cinematic travel series — every project gets the same obsessive attention 
+      to light, composition, and emotional resonance.
+    </p>
+    <div class="about-stats">
+      <div class="stat">
+        <span class="stat-num" data-count="150">0</span><span class="stat-unit">+</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="5">0</span><span class="stat-unit">yr</span>
+        <span class="stat-label">Experience</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="12">0</span><span class="stat-unit">+</span>
+        <span class="stat-label">Countries</span>
+      </div>
+    </div>
+    <div class="about-services">
+      <span>Photography</span>
+      <span>Cinematography</span>
+      <span>Color Grading</span>
+      <span>Motion Graphics</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ GALLERY ═══════════════════ -->
+<section class="gallery-section parallax-section" id="gallery">
+  <div class="section-header" data-parallax="0.1">
+    <span class="section-tag">Gallery</span>
+    <h2 class="section-title">Still &amp;<br/><em>Moving</em></h2>
+  </div>
+
+  <div class="gallery-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="photo">Photos</button>
+    <button class="filter-btn" data-filter="video">Videos</button>
+  </div>
+
+  <div class="gallery-grid gallery-collapsed" id="galleryGrid">
+    <div class="gallery-loading">
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+
+  <!-- See More / See Less -->
+  <div class="gallery-more-wrap" id="galleryMoreWrap" style="display:none">
+    <button class="gallery-more-btn" id="galleryMoreBtn" onclick="toggleGallery()">
+      <span class="gmb-text">See More</span>
+      <span class="gmb-arrow">↓</span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════════════ VIDEO LIGHTBOX ═══════════════════ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <div class="lightbox-content" id="lightboxContent"></div>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ═══════════════════ PROCESS ═══════════════════ -->
+<section class="process-section parallax-section">
+  <div class="process-inner">
+    <div class="section-header" data-parallax="0.1">
+      <span class="section-tag">Process</span>
+      <h2 class="section-title">How I<br/><em>Work</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step" data-step="I">
+        <div class="step-icon">◎</div>
+        <h3>Vision</h3>
+        <p>We begin with a conversation. Understanding your story, your audience, the feeling you want to leave behind.</p>
+      </div>
+      <div class="process-step" data-step="II">
+        <div class="step-icon">◈</div>
+        <h3>Capture</h3>
+        <p>On location in Bali or beyond — I shoot with intention, hunting light and authentic moments.</p>
+      </div>
+      <div class="process-step" data-step="III">
+        <div class="step-icon">◉</div>
+        <h3>Edit</h3>
+        <p>Color grading, sound design, and narrative assembly — crafting the final piece with precision.</p>
+      </div>
+      <div class="process-step" data-step="IV">
+        <div class="step-icon">◌</div>
+        <h3>Deliver</h3>
+        <p>High-resolution files, multiple formats, ready for web, cinema, or social — exactly how you need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CONTACT Q&A ═══════════════════ -->
+<section class="contact-section parallax-section" id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-left" data-parallax="0.12">
+      <span class="section-tag">Contact</span>
+      <h2 class="contact-title">Let's Make<br/><em>Something.</em></h2>
+      <p class="contact-sub">Based in Bali. Available worldwide.</p>
+      <a href="mailto:youredit2026@gmail.com" class="contact-email">youredit2026@gmail.com</a>
+
+      <!-- Book Now CTA — standalone block below email -->
+      <div class="book-btn-wrap">
+        <a href="booking.html" class="book-btn">
+          <span class="book-btn-text">Book Now</span>
+          <span class="book-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="contact-social">
+        <a href="#" class="social-link" target="_blank">Instagram</a>
+        <a href="#" class="social-link" target="_blank">YouTube</a>
+        <a href="#" class="social-link" target="_blank">Vimeo</a>
+      </div>
+    </div>
+
+    <!-- Q&A FAQ -->
+    <div class="contact-right" data-parallax="0.06">
+      <div class="qa-header">
+        <span class="section-tag">FAQ</span>
+        <h3 class="qa-title">Common<br/><em>Questions</em></h3>
+      </div>
+      <div class="qa-list">
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>What areas do you cover?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>Based in Bali, I'm available across all of Indonesia and internationally. Travel fees apply for destinations outside Bali — get in touch and I'll put together a quote.</p>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>How far in advance should I book?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>For weddings and commercial shoots, I recommend booking at least 2–3 months ahead. For lifestyle, portrait, and editing projects, 2–4 weeks is usually enough. Peak season (July–August, Dec–Jan) fills fast.</p>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>What's included in the photography rate?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>Photography starts at <strong>Rp 1.000.000 / hour</strong> and includes on-location shooting, culling, and basic editing of selected images delivered as high-resolution JPEGs. Advanced retouching is available as an add-on.</p>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>What are the videography packages?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>Videography pricing depends on the scope:</p>
+            <ul class="qa-price-list">
+              <li><span>Wedding</span><em>from Rp 10.000.000</em></li>
+              <li><span>Commercial</span><em>from Rp 5.000.000</em></li>
+              <li><span>Property</span><em>from Rp 3.000.000</em></li>
+              <li><span>Lifestyle</span><em>from Rp 1.000.000</em></li>
+            </ul>
+            <p>All packages include filming, editing, colour grading, and delivery in your required format.</p>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>How does video editing work if I have my own footage?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>Send me your raw footage and I'll handle the rest. A <strong>Basic Cut</strong> covers assembly and trimming. The <strong>Full Package</strong> includes assembly, colour grading, typography, motion graphics, and sound mixing — starting at <strong>Rp 2.000.000</strong> for short-form content and <strong>Rp 5.000.000</strong> for long-form.</p>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>How do I pay? Can I pay from overseas?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>I accept two payment methods:</p>
+            <ul class="qa-price-list">
+              <li><span>🇮🇩 Bank Transfer</span><em>Blu by BCA — 007002991116</em></li>
+              <li><span>🌍 PayPal</span><em>calvinchristian15k1@gmail.com</em></li>
+            </ul>
+            <p>A 50% deposit is required to confirm your booking, with the balance due on delivery.</p>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false">
+            <span>How long until I receive my files?</span>
+            <span class="qa-icon">+</span>
+          </button>
+          <div class="qa-answer">
+            <p>Photography edits are typically delivered within 7–14 days. Video projects vary by complexity — short edits in 5–7 days, full productions in 2–4 weeks. Rush turnarounds are available on request.</p>
+          </div>
+        </div>
+
+      </div><!-- /.qa-list -->
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-name">Calvin Christian</span>
+    <span class="footer-loc">Bali, Indonesia</span>
+    <span class="footer-copy">© 2026 — All rights reserved</span>
+  </div>
+  <a href="#hero" class="footer-top">Back to top ↑</a>
+</footer>
+
+<!-- Admin link (discreet) -->
+<a href="admin/login.php" class="admin-link" title="Admin Panel">⚙</a>
+
+<script src="js/main.js"></script>
+<script>
+// Analytics tracker
+(function(){
+  try {
+    fetch('php/api_track.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        page: window.location.pathname,
+        referrer: document.referrer || ''
+      })
+    });
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
